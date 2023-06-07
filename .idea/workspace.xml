@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86525a62-7b3b-4a43-99b3-5158ed257adf" name="Changes" comment="" />
+    <list default="true" id="86525a62-7b3b-4a43-99b3-5158ed257adf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/custom.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,7 +92,7 @@
       <workItem from="1686137841197" duration="370000" />
       <workItem from="1686138226268" duration="903000" />
       <workItem from="1686140293983" duration="1051000" />
-      <workItem from="1686141413107" duration="463000" />
+      <workItem from="1686141413107" duration="2510000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;stable01&quot;&#10;&#10;This reverts commit 557dbb3e">
       <created>1686138615289</created>
@@ -117,7 +124,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main1" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>

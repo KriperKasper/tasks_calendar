@@ -1,0 +1,14 @@
+
+/* make the customizations */
+
+.row-cols-sm-6 > * {
+  flex: 0 0 auto;
+  width: 14.28% !important;
+}
+.list-group {
+  min-height: 20px;
+}
+$grid-columns: 14 ;
+
+/* import bootstrap to set changes */
+@import '~bootstrap/scss/bootstrap';
