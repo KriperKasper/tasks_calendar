@@ -1,24 +1,26 @@
-import React, {useEffect} from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import React, {useEffect} from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import {DragDropContext} from "react-beautiful-dnd";
-import Col from 'react-bootstrap/Col';
+import Col from "react-bootstrap/Col";
 import {useActions} from "../../hooks/useActions";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import Cell from "../Cell/Cell";
 import CellHeader from "../CellHeader/CellHeader";
 import Loader from "../Loader/Loader";
 import {ContainerDayNames} from "./CellContainer.styled";
+import {changeTaskLocation} from "../../store/action-creators/calendar";
 
 const daysNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 const CellContainer: React.FC = () => {
     const {days, firstDay, month} = useTypedSelector(state => state.calendar)
-    const {calendarSetup, changeTaskIn} = useActions()
+    const {calendarSetup, changeTaskLocation} = useActions()
     useEffect(() => {
         calendarSetup()
     }, [])
-    const onDragEnd = (result: { destination: any; source: any; draggableId: any; type: any; }) => {
+    // @ts-ignore
+    const onDragEnd = (result) => {
         const {destination, source, draggableId, type} = result;
         if (!destination) {
             return;
@@ -29,11 +31,11 @@ const CellContainer: React.FC = () => {
         const home = source.droppableId;
         const foreign = destination.droppableId;
         if (home === foreign) {
-            changeTaskIn({day: home, start: source.index, end: destination.index, draggableId});
+            changeTaskLocation({day: home, start: source.index, end: destination.index, draggableId});
             return;
         }
         if (home !== foreign) {
-            changeTaskIn({day: home, sourceDest: foreign, start: source.index, end: destination.index, draggableId});
+            changeTaskLocation({day: home, sourceDest: foreign, start: source.index, end: destination.index, draggableId});
         }
     }
     let offset = firstDay;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {CellContainer} from "./CellHeader.styled";
 import Col from "react-bootstrap/Col";
 import {Badge, Dropdown, DropdownButton, Form} from "react-bootstrap";

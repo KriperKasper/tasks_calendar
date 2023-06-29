@@ -14,8 +14,10 @@ export const calendarReducer = (state = initialState, action: CalendarAction): C
             return {...state, month: action.payload.month, days: action.payload.days, firstDay: action.payload.firstDay, error: null}
         case CalendarActionTypes.ADD_TASK:
             return {...state, days: action.payload.days}
-        case CalendarActionTypes.CHANGE_TASK_IN:
+        case CalendarActionTypes.CHANGE_TASK_LOCATION:
             return {...state, days: action.payload.days}
+        case CalendarActionTypes.ERROR_CALENDAR:
+            return {...state, error: action.payload}
         default:
             return state
     }

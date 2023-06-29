@@ -39,6 +39,8 @@ export const calendarSetup = () => {
                     "countryCode": "string",
                     "name": "string"
                 } = {...AvailableCountries.data.find((item: { name: string }) => item.name === country)};
+
+
             if (currentCountry) {
                 const calendarInfo: AxiosResponse<Holidays> = await axios.get(`https://date.nager.at/api/v3/PublicHolidays/${moment().format("YYYY")}/${currentCountry.countryCode}`)
                 for (let i = 1; i <= moment().daysInMonth(); i++) {
@@ -66,6 +68,7 @@ export const calendarSetup = () => {
                     }
                 });
             } else {
+                console.log("Country not found");
                 for (let i = 1; i <= moment().daysInMonth(); i++) {
                     days.push({day: i, dayId: "day" + i, tasks: [], holiday: ""});
                 }
@@ -79,7 +82,11 @@ export const calendarSetup = () => {
                     }
                 });
             }
-        } catch (e) {
+        } catch (e ) {
+            dispatch({
+                type: CalendarActionTypes.ERROR_CALENDAR,
+                payload: e
+            });
         }
     }
 }
@@ -89,7 +96,7 @@ export const filterTask = (filter: string, value: string) => {
         try {
             if (filter === "byName") {
                 const newTasks = state.calendar.days.map((item: CalendarDay) => {
-                    item.tasks = item.tasks.map((task: any) => {
+                    item.tasks = item.tasks.map((task: Task) => {
                         task.visible = task.priority === value;
                         return task;
                     })
@@ -100,7 +107,7 @@ export const filterTask = (filter: string, value: string) => {
             } else if (filter === "byText") {
                 console.log(filter, value);
                 const newTasks = state.calendar.days.map((item: CalendarDay) => {
-                    item.tasks = item.tasks.map((task: any) => {
+                    item.tasks = item.tasks.map((task: Task) => {
 
                         task.visible = !!task.text.toLowerCase().match(value.toLowerCase());
                         return task;
@@ -112,6 +119,10 @@ export const filterTask = (filter: string, value: string) => {
             }
 
         } catch (e) {
+            dispatch({
+                type: CalendarActionTypes.ERROR_CALENDAR,
+                payload: e
+            });
         }
     }
 }
@@ -123,17 +134,21 @@ export const addTask = (payload: { dayId: string; task: Task; }) => {
             const newTasks = state.calendar.days.map((item: CalendarDay) => {
                 if (item.dayId === dayId) {
                     item.tasks.push(task);
-                    item.tasks = item.tasks.map((item: any) => item)
+                    item.tasks = item.tasks.map((item: Task) => item)
                     return item;
                 }
                 return item;
             });
             dispatch({type: CalendarActionTypes.ADD_TASK, payload: {...state.calendar, days: newTasks}});
         } catch (e) {
+            dispatch({
+                type: CalendarActionTypes.ERROR_CALENDAR,
+                payload: e
+            });
         }
     }
 }
-export const changeTaskIn = (payload: {
+export const changeTaskLocation = (payload: {
     start: number;
     draggableId: number;
     end: number;
@@ -149,7 +164,7 @@ export const changeTaskIn = (payload: {
                 let newTasks = state.calendar.days.map((item: CalendarDay) => {
                     if (item.dayId === day) {
                         element = item.tasks.splice(start, 1);
-                        item.tasks = item.tasks.map((item: any) => item)
+                        item.tasks = item.tasks.map((item: Task) => item)
                         return item;
                     }
                     return item;
@@ -157,24 +172,28 @@ export const changeTaskIn = (payload: {
                 newTasks = newTasks.map((item: CalendarDay) => {
                     if (item.dayId === sourceDest && element) {
                         item.tasks.splice(end, 0, ...element)
-                        item.tasks = item.tasks.map((item: any) => item)
+                        item.tasks = item.tasks.map((item: Task) => item)
                     }
                     return item;
                 });
-                dispatch({type: CalendarActionTypes.CHANGE_TASK_IN, payload: {...state.calendar, days: newTasks}});
+                dispatch({type: CalendarActionTypes.CHANGE_TASK_LOCATION, payload: {...state.calendar, days: newTasks}});
             } else {
                 const newTasks = state.calendar.days.map((item: CalendarDay) => {
                     if (item.dayId === day) {
                         const element = item.tasks.splice(start, 1);
                         item.tasks.splice(end, 0, ...element);
-                        item.tasks = item.tasks.map((item: any) => item)
+                        item.tasks = item.tasks.map((item: Task) => item)
                         return item;
                     }
                     return item;
                 });
-                dispatch({type: CalendarActionTypes.CHANGE_TASK_IN, payload: {...state.calendar, days: newTasks}});
+                dispatch({type: CalendarActionTypes.CHANGE_TASK_LOCATION, payload: {...state.calendar, days: newTasks}});
             }
         } catch (e) {
+            dispatch({
+                type: CalendarActionTypes.ERROR_CALENDAR,
+                payload: e
+            });
         }
     }
 }

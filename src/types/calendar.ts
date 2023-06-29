@@ -39,18 +39,23 @@ export interface Holiday {
 export enum CalendarActionTypes {
     SETUP_CALENDAR = 'SETUP_CALENDAR',
     ADD_TASK = 'ADD_TASK',
-    CHANGE_TASK_IN = 'CHANGE_TASK_IN',
+    CHANGE_TASK_LOCATION = 'CHANGE_TASK_LOCATION',
+    ERROR_CALENDAR = 'ERROR_CALENDAR',
 }
 interface CalendarActionSetupCalendar {
     type: CalendarActionTypes.SETUP_CALENDAR;
     payload: CalendarState;
 }
+interface CalendarActionErrorCalendar {
+    type: CalendarActionTypes.ERROR_CALENDAR;
+    payload:any;
+}
 interface CalendarActionAddTask {
     type: CalendarActionTypes.ADD_TASK;
     payload: CalendarState;
 }
-interface CalendarActionChangeTaskIn {
-    type: CalendarActionTypes.CHANGE_TASK_IN;
+interface CalendarActionChangeTaskLocation {
+    type: CalendarActionTypes.CHANGE_TASK_LOCATION;
     payload: CalendarState;
 }
-export type CalendarAction = CalendarActionSetupCalendar | CalendarActionAddTask | CalendarActionChangeTaskIn;
+export type CalendarAction = CalendarActionSetupCalendar | CalendarActionAddTask | CalendarActionChangeTaskLocation | CalendarActionErrorCalendar;

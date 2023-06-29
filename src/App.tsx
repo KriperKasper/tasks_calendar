@@ -1,9 +1,9 @@
-import React from 'react';
-import html2canvas from 'html2canvas';
+import React from "react";
+import html2canvas from "html2canvas";
 import CellContainer from "./components/CellContainer/CellContainer";
 import {ThemeProvider} from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './custom.scss';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./custom.scss";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
